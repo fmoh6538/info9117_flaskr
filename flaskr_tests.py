@@ -68,13 +68,44 @@ class FlaskrTestCase(unittest.TestCase):
         self.login('admin', 'default')
         rv = self.app.post('/add', data=dict(
             title='<Hello>',
-            text='<strong>HTML</strong> allowed here'
+            text='<strong>HTML</strong> allowed here',
+			start_time= '<15:00>',
+			end_time= '<17:30>'
         ), follow_redirects=True)
         assert 'No entries here so far' not in rv.data
         assert '&lt;Hello&gt;' in rv.data
         assert '<strong>HTML</strong> allowed here' in rv.data
 
-
+	def User_2(self):
+		self.login('jim', 'bean')
+        rv = self.app.post('/add', data=dict(
+            title='<Hello>',
+            text='<strong>HTML</strong> allowed here',
+			start_time= '<14:00>',
+			end_time= '<16:30>'
+        ), follow_redirects=True)
+        assert 'No entries here so far' not in rv.data	
+        assert '&lt;Doneon09March2015&gt;' in rv.data
+        assert '&lt;Hello&gt;' in rv.data
+        assert '<strong>HTML</strong> allowed here' in rv.data
+        assert 'by jim' in rv.data
+		
+				
+	def test_time(self):
+		self.login('admin', 'default')
+        rv = self.app.post('/add', data=dict(
+            title='<Hello>',
+            text='<strong>HTML</strong> allowed here',
+			start_time= '<15:00>',
+			end_time= '<17:30>'
+        ), follow_redirects=True)
+        assert 'No entries here so far' not in rv.data
+        assert '&lt;Hello&gt;' in rv.data
+        assert 'by admin' in rv.data
+        assert '&lt;15:00&gt;' in rv.data
+        assert '&lt;17:30&gt;' in rv.data
+        
+		
 if __name__ == '__main__':
     unittest.main()
 
