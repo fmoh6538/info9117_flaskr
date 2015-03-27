@@ -102,7 +102,7 @@ class FlaskrTestCase(unittest.TestCase):
         assert '&lt;Hello&gt;' in rv.data
         assert 'by admin' in rv.data
         assert '&lt;15:00&gt;' in rv.data
-        assert '&lt;17:00&gt;' in rv.data
+        assert '&lt;17:30&gt;' in rv.data
         
 
 if __name__ == '__main__':
