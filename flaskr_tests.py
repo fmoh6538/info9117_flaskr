@@ -55,7 +55,7 @@ class FlaskrTestCase(unittest.TestCase):
         assert 'Invalid password' in rv.data
 
     def test_login_logout(self):
-        rv = self.login('admi', 'default')
+        rv = self.login('admin', 'default')
         assert 'You were logged in' in rv.data
         rv = self.logout()
         assert 'You were logged out' in rv.data
