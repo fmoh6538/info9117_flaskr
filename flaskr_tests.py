@@ -73,7 +73,7 @@ class FlaskrTestCase(unittest.TestCase):
             end_time= '<17:30>'
         ), follow_redirects=True)
         assert 'No entries here so far' not in rv.data
-        assert '&lt;Hell&gt;' in rv.data
+        assert '&lt;Hello&gt;' in rv.data
         assert '<strong>HTML</strong> allowed here' in rv.data
 
     def test_message_other_user(self):
@@ -102,7 +102,7 @@ class FlaskrTestCase(unittest.TestCase):
         assert '&lt;Hello&gt;' in rv.data
         assert 'by admin' in rv.data
         assert '&lt;15:00&gt;' in rv.data
-        assert '&lt;17:30&gt;' in rv.data
+        assert '&lt;17:00&gt;' in rv.data
         
 
 if __name__ == '__main__':
