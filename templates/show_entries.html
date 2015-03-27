@@ -17,7 +17,7 @@
 {% endif %}
 <ul class=entries>
 {% for entry in entries %}
-<li><h2>{{ entry.title }} <span class=user> by {{ entry.username }} </span></h2> {{ entry.text|safe }} </span></h3> {{ entry.start_time }} </span></h3> {{ entry.end_time }}
+<li><h2>{{ entry.title }} <span class=user> by {{ entry.username }} </span></h2> {{ entry.text|safe }} </span></h3> {{ entry.start_time }} </span></h3> {{ entry.end_time }} 
 {% else %}
 <li><em>No entries here yet</em></li>
 {% endfor %}

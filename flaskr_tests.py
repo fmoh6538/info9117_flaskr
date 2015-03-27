@@ -69,51 +69,34 @@ class FlaskrTestCase(unittest.TestCase):
         rv = self.app.post('/add', data=dict(
             title='<Hello>',
             text='<strong>HTML</strong> allowed here',
-			start_time= '<15:00>',
-			end_time= '<17:30>'
+            start_time= '<15:00>',
+            end_time= '<17:30>'
         ), follow_redirects=True)
         assert 'No entries here so far' not in rv.data
-        assert '&lt;Hello&gt;' in rv.data
+        assert '&lt;Hell&gt;' in rv.data
         assert '<strong>HTML</strong> allowed here' in rv.data
 
-	def User_1(self):
-		self.login('admin', 'default')
-        rv = self.app.post('/add', data=dict(
-            title='<Hello>',
-            text='<strong>HTML</strong> allowed here',
-			start_time= '<15:00>',
-			end_time= '<17:30>'
-        ), follow_redirects=True)
-        assert 'No entries here so far' not in rv.data	
-        assert '&lt;Hello&gt;' in rv.data
-        assert '<strong>HTML</strong> allowed here' in rv.data
-        assert 'by admin' in rv.data
-        assert '&lt;15:00&gt;' in rv.data
-        assert '&lt;17:30&gt;' in rv.data
-		
-	def User_2(self):
-		self.login('jim', 'bean')
+    def test_message_other_user(self):
+        self.login('jim', 'bean')
         rv = self.app.post('/add', data=dict(
             title='<C++_Exercise_01>',
             text='<strong>HTML</strong> allowed here',
-			start_time= '<15:00>',
-			end_time= '<16:00>'
+            start_time= '<15:00>',
+            end_time= '<16:00>'
         ), follow_redirects=True)
-        assert 'No entries here so far' not in rv.data	
-        assert '&lt;C++_Exercise_01&gt;' in rv.data
+        assert 'No entries here so far' not in rv.data 
+        assert '&lt;C++_Exercise_01&gt; <span class=user> by jim' in rv.data
         assert '<strong>HTML</strong> allowed here' in rv.data
-        assert 'by admin' in rv.data
         assert '&lt;15:00&gt;' in rv.data
         assert '&lt;16:00&gt;' in rv.data
 
-		
-	def test_time(self):
-		self.login('admin', 'default')
+    def test_time(self):
+        self.login('admin', 'default')
         rv = self.app.post('/add', data=dict(
             title='<Hello>',
             text='<strong>HTML</strong> allowed here',
-			start_time= '<15:00>',
-			end_time= '<17:30>'
+            start_time= '<15:00>',
+            end_time= '<17:30>'
         ), follow_redirects=True)
         assert 'No entries here so far' not in rv.data
         assert '&lt;Hello&gt;' in rv.data
@@ -121,7 +104,7 @@ class FlaskrTestCase(unittest.TestCase):
         assert '&lt;15:00&gt;' in rv.data
         assert '&lt;17:30&gt;' in rv.data
         
-		
+
 if __name__ == '__main__':
     unittest.main()
 
